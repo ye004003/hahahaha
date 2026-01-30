@@ -1,0 +1,122 @@
+@import url(font.css);
+@import url(reset.css);
+
+
+body { font-family: "Ysabeau SC", sans-serif;}
+.container {width: 1520px; margin: 0 auto; }
+
+
+header { width: 100%; background: #000;}
+header .header {height: 112px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;}
+header .header .icon {}
+header .header .logo {}
+header .header .login {display: flex; gap: 40px;}
+header .header .login li {}
+
+header nav {width: 100%; background: #fff; height: 97px;}
+header nav .menu {font-size: 24px; display: flex; justify-content: space-between;}
+header nav .menu > li {height: 97px; width: 304px;  display: flex; align-items: center; justify-content: center; position: relative; }
+header nav .menu > li:hover {background: #94845B; } 
+header nav .menu > li > a { display: block; padding: 20px 30px;}
+header nav .menu li:hover > a {color: #fff;}
+
+header nav .menu li .lnb {width: 455px; height: 203px; background:rgba(255,255,255,0.8); position: absolute; top: 100%; visibility: hidden; opacity: 0; transition: 0.5s; left: 0; backdrop-filter: blur(3px); z-index: 3;}
+header nav .menu li:hover .lnb {visibility: visible; opacity: 1; left: 50px;}
+header nav .menu li .lnb {display: flex; align-items: center; }
+header nav .menu li .lnb li.photo {height: 100%; display: flex; align-items: center; margin-left: 40px;}
+header nav .menu li .lnb li.photo a {width: 180px;}
+header nav .menu li .lnb .lnbmenu {height: 100%;  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;}
+header nav .menu li .lnb .lnbmenu li {width: 40%; padding: 10px 0; font-size: 16px; text-align: center; }
+header nav .menu li .lnb .lnbmenu li a { padding: 15px;}
+header nav .menu li .lnb .lnbmenu li:hover > a {background: #806F4D; border-radius: 5px;}
+
+.herowrap {overflow: hidden; position: relative;}
+.herowrap img.hero {width: 100%; display: block; animation: heroImg 6s forwards; transform-origin: center;}
+@keyframes heroImg {
+    0% {transform: scale(1.2);}
+    100% {transform: scale(1);}
+}
+.herowrap .herotext {position: absolute; z-index: 15; color: #fff; top: 50%; transform: translateY(-50%);}
+.herowrap .herotext .big {font-size: 64px; font-weight: 300; animation: heroText 3s forwards; position: relative;}
+.herowrap .herotext p {font-size: 30px; font-weight: 100; animation: heroText 3.5s forwards; position: relative;}
+
+@keyframes heroText {
+    0% {left: 200px; opacity: 0;}
+    100% {left: 0; opacity: 1;}
+}
+
+.section1 .container {}
+.section1 .container .textbox {text-align: center; margin-top: 180px;}
+.section1 .container .textbox .big {font-size: 36px; color: #806F4D;}
+.section1 .container .textbox .small {line-height: 50px; margin-top: 30px; font-size: 20px;}
+.section1 .container .btnmore { display: flex; align-items: center; justify-content: center;}
+.section1 .container .btnmore a { width: 194px; height: 60px;font-size: 22px; color: #94855B; display: block;  display: flex; align-items: center; gap: 20px; border: 1px solid #94855B; justify-content: center; margin: 100px 0 170px;}
+.section1 .container .btnmore img {}
+
+.section2 {background: url(../images/mainbg.png);  width: 100%; height: 503px; background-repeat: no-repeat; background-position: center;}
+.section2 .container {display: flex; align-items: center; height: 100%} 
+.section2 .container .content {display: flex; gap: 44px;  }
+.section2 .container .content li {width: 477px; height: 268px; }
+.section2 .container .content img {transition: 0.4s;}
+.section2 .container .content img:hover {scale: 1.1;}
+.section2 .container .content p {color: #fff; text-align: center; margin-top: 30px;}
+
+.banner {background: url(../images/banner.png); height: 176px; margin-top: 230px; background-repeat: no-repeat; background-position: center;}
+.banner .container { height: 100%; position: relative;}
+.banner .container .btnmore {color: #fff; position: absolute; bottom: 0; padding: 5px 0; border-bottom: 1px solid #fff; margin-bottom: 10px; margin-left: 5px;} 
+
+.btnmore a {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 20px;
+    color: #94855B;
+    border: 1px solid #94855B;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btnmore a:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 10px rgba(194, 177, 177, 0.4);}
+
+.container .textbox2 {padding: 200px 0;}
+.container .textbox2 strong {text-align: center; display: block; font-size: 40px; }
+.container .textbox2 p {text-align: center;}
+
+.section3 {}
+.section3 .container {}
+.section3 .container .content1 {display: flex;}
+.section3 .container .content1 .photo {width: 767px; height: 482px;}
+.section3 .container .content1 .textbox {}
+.section3 .container .content1 .textbox ul { display: flex; flex-direction: column; gap: 50px;  padding: 70px 0; padding-left: 30px;}
+.section3 .container .content1 .textbox ul strong {font-size: 32px; color: #806F4D;}
+.section3 .container .content2 {display: flex; gap: 28px; margin-top: 28px;}
+.section3 .container .content2 li span {color: #9E8A62; padding: 10px 0; display: block; font-size: 20px;}
+.btnmore.section3 { display: flex; align-items: center; justify-content: center;}
+.btnmore.section3 a { width: 194px; height: 60px;font-size: 22px; color: #94855B; display: block;  display: flex; align-items: center; gap: 20px; border: 1px solid #94855B; justify-content: center; margin: 100px 0 170px;}
+
+footer {height: 415px; width: 100%; background: #000;}
+footer .container {display: flex; gap: 30px;}
+footer .container h1 {height: 415px; display: flex; align-items: center;}
+footer .container h1 img {}
+footer .footertext {color: #fff; flex-grow: 1;}
+footer .footertext .top {display: flex; gap: 60px;}
+footer .footertext .top li {display: flex; flex-direction: column; gap: 10px; margin-top: 35px;}
+footer .footertext .top strong {font-size: 28px;}
+footer .footertext .top p {}
+footer .footertext .bottom {margin-top: 30px; display: flex; flex-direction: column; gap: 5px;}
+
+
+
+/* sub */
+.section1 {}
+.sub.container { padding: 200px 0;}
+.container .content {display: flex; justify-content: center; gap: 150px;}
+.container .textbox {display: flex; flex-direction: column; justify-content: center; gap: 50px;}
+.container .textbox p {line-height: 30px;}
+.container .textbox strong {color: #806F4D; font-size: 36px; font-weight: 400;}
+.container figure {width: 881px; height: 509px;  }
+.sub.container .btnmore { display: flex; align-items: center; justify-content: center;}
+.sub.container .btnmore a { width: 194px; height: 60px;font-size: 22px; color: #94855B;
+     display: block;  display: flex; align-items: center; gap: 20px; border: 1px solid #94855B; justify-content: center; margin: 100px 0 170px;}
+.herowrap {border: 1px solid #000;}
+.herotext {border: 1px solid red;}
