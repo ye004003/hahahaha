@@ -2,8 +2,8 @@
 @import url(reset.css);
 
 
-body { font-family: "Ysabeau SC", sans-serif;}
-.container {width: 1520px; margin: 0 auto; }
+body {font-family: "Noto Sans", sans-serif;}
+.container {max-width:1520px; ;margin: 0 auto; }
 
 
 header { width: 100%; background: #000;}
@@ -13,7 +13,77 @@ header .header .logo {}
 header .header .login {display: flex; gap: 40px;}
 header .header .login li {}
 
-header nav {width: 100%; background: #fff; height: 97px;}
+/* PC에서는 숨김 */
+.m_menu_btn {
+    display: none;
+    cursor: pointer;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    z-index: 9999;
+}
+
+.m_menu_btn span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #fff; /* 로고 색상에 맞춰 조정 */
+    margin-bottom: 5px;
+    transition: 0.3s;
+}
+
+/* 모바일 반응형 설정 */
+@media screen and (max-width: 768px) {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    .m_menu_btn {
+        display: block; /* 모바일에서 등장 */
+        order: 3; /* 로고 오른쪽 배치를 위해 순서 조정 */
+    }
+
+    .logo { order: 2; }
+    .icon { order: 1; }
+    .login { display: none; } /* 모바일에서 로그인 아이콘 숨길 경우 */
+
+    /* 네비게이션 메뉴를 모바일용으로 변환 */
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%; /* 처음엔 숨김 */
+        width: 70%;
+        height: 100%;
+        background: #fff;
+        transition: 0.5s;
+        z-index: 999;
+        padding-top: 80px;
+    }
+
+    nav.active {
+        right: 0; /* 버튼 클릭 시 등장 */
+    }
+
+    .menu {
+        flex-direction: column;
+    }
+    
+    .menu > li > a {
+        color: #333;
+        padding: 15px 20px;
+        display: block;
+    }
+
+    /* 햄버거 버튼 애니메이션 (선택사항) */
+    .m_menu_btn.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .m_menu_btn.open span:nth-child(2) { opacity: 0; }
+    .m_menu_btn.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
+
+header nav {width: 100%; background: #fff; height: 97px; border: 1px solid red;}
 header nav .menu {font-size: 24px; display: flex; justify-content: space-between;}
 header nav .menu > li {height: 97px; width: 304px;  display: flex; align-items: center; justify-content: center; position: relative; }
 header nav .menu > li:hover {background: #94845B; } 
@@ -27,10 +97,89 @@ header nav .menu li .lnb li.photo {height: 100%; display: flex; align-items: cen
 header nav .menu li .lnb li.photo a {width: 180px;}
 header nav .menu li .lnb .lnbmenu {height: 100%;  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;}
 header nav .menu li .lnb .lnbmenu li {width: 40%; padding: 10px 0; font-size: 16px; text-align: center; }
-header nav .menu li .lnb .lnbmenu li a { padding: 15px;}
+header nav .menu li .lnb .lnbmenu li a { padding: 13px;}
 header nav .menu li .lnb .lnbmenu li:hover > a {background: #806F4D; border-radius: 5px;}
 
-.herowrap {overflow: hidden; position: relative;}
+
+@media (max-width:768px) {
+    header nav {display: none;}
+    .herowrap {height: 574px;}
+    .herowrap img.hero {height: 100%;}
+    header .header .login {display: none;}
+    header .header .logo {margin: 0 auto;}/* 좌우 여백을 자동으로 계산해 중앙 정렬 */
+    header .logo img {width: 40vh;  margin-right: 10px; margin-top: 10px; display: block;} 
+    .section1 .container .textbox .big {font-size: 30px !important;word-break: keep-all; line-height: 1.3;}
+    .section1 .container .textbox p {word-break:keep-all }
+    .section2 {background: url(../images/mainbg.png);
+    width: 100%;
+    /* 이미지가 화면을 꽉 채우도록 설정 */
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center;
+    /* 고정 높이 대신 최소 높이를 설정하거나, 높이 설정을 삭제하여 콘텐츠에 맞게 늘어나게 함 */
+    height: auto; 
+    min-height: 500px; /* 최소한의 높이 확보 */}
+    
+
+
+    /* --- 모바일 반응형 통합 수정 --- */
+@media screen and (max-width: 768px) {
+    /* [기본 헤더 설정] */
+    header nav { display: none; }
+    header .header .login { display: none; }
+    header .header .logo { margin: 0 auto; }
+    header .logo img { width: 40vh; margin: 10px auto; display: block; }
+
+    /* [문제의 Section2 배경 해결] */
+    .section2 {
+        background-image: url(../images/mainbg.png) !important; /* 이미지 강제 지정 */
+        background-size: cover !important;     /* 👈 핵심: 배경이 꽉 차게 */
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        height: auto !important;               /* 👈 높이를 내용에 맞게 자동 조절 */
+        min-height: 600px;                     /* 최소 높이 확보 */
+        padding: 100px 0;                      /* 위아래 여백을 줘서 배경이 보이게 함 */
+    }
+
+    .section2 .container {
+        height: auto;                          /* 컨테이너도 내용만큼 늘어나게 */
+        display: block;                        /* flex 대신 차곡차곡 쌓이게 */
+    }
+
+    .section2 .container .content {
+        display: flex;
+        flex-direction: column;                /* 가로가 아닌 세로로 배치 */
+        align-items: center;
+        gap: 30px;
+    }
+
+    /* [기타 섹션 조절] */
+    .section1 .container .textbox .big { font-size: 30px !important; word-break: keep-all; line-height: 1.3; }
+    .herowrap { height: 574px; }
+}
+    .section2 .container {}
+    .section2 .container .content {display: flex; flex-direction: column; align-items: center; gap: 30px; align-items: center; }
+    .section2 .container .content img {}
+    .section2 .content p {border: 1px solid blueviolet; } 
+    .banner {}
+    
+    .section3 .container {}
+    .section3 .container .content1 {border: 1px solid #000; position: relative; display: flex; flex-direction: column; text-align: center;
+    word-break: keep-all; justify-content: center;}
+    .section3 .container strong {position: absolute; left: 50%; top:-80px; transform:translateX(-50%); }
+    .section3 .container .content1 .photo img {
+        width: 100%;       /* 화면 너비에 맞게 꽉 채움 */
+          /* 원본보다 커지지 않게 함 */
+        height: auto;      /* 비율 유지하며 축소 */
+        object-fit: cover; /* 영역에 맞게 이미지 채우기 */
+    }
+    .section3 .container .content2 {display: flex; flex-direction: column ; align-items: center;}
+    .section3 .container .content2 li {}
+    .section3 .container .content1 .textbox ul {}
+    }
+
+
+.herowrap {overflow: hidden ; position:relative; }
 .herowrap img.hero {width: 100%; display: block; animation: heroImg 6s forwards; transform-origin: center;}
 @keyframes heroImg {
     0% {transform: scale(1.2);}
@@ -48,18 +197,19 @@ header nav .menu li .lnb .lnbmenu li:hover > a {background: #806F4D; border-radi
 .section1 .container {}
 .section1 .container .textbox {text-align: center; margin-top: 180px;}
 .section1 .container .textbox .big {font-size: 36px; color: #806F4D;}
-.section1 .container .textbox .small {line-height: 50px; margin-top: 30px; font-size: 20px;}
+.section1 .container .textbox .small {line-height: 50px; margin-top: 30px; font-size: 2;}
 .section1 .container .btnmore { display: flex; align-items: center; justify-content: center;}
 .section1 .container .btnmore a { width: 194px; height: 60px;font-size: 22px; color: #94855B; display: block;  display: flex; align-items: center; gap: 20px; border: 1px solid #94855B; justify-content: center; margin: 100px 0 170px;}
 .section1 .container .btnmore img {}
 
-.section2 {background: url(../images/mainbg.png);  width: 100%; height: 503px; background-repeat: no-repeat; background-position: center;}
+.section2 {background: url(../images/mainbg.png);  width: 100%;  background-repeat: no-repeat; background-position: center;
+padding: 30px 0 30px;}
 .section2 .container {display: flex; align-items: center; height: 100%} 
-.section2 .container .content {display: flex; gap: 44px;  }
-.section2 .container .content li {width: 477px; height: 268px; }
-.section2 .container .content img {transition: 0.4s;}
+.section2 .container .content {display: flex; gap: 44px; justify-content: center;}
+.section2 .container .content li {max-width: 477px; }
+.section2 .container .content img {transition: 0.4s; width: 100%;}
 .section2 .container .content img:hover {scale: 1.1;}
-.section2 .container .content p {color: #fff; text-align: center; margin-top: 30px;}
+.section2 .container .content p {color: #fff; text-align: center; margin-top: 30px; border: 1px solid red; }
 
 .banner {background: url(../images/banner.png); height: 176px; margin-top: 230px; background-repeat: no-repeat; background-position: center;}
 .banner .container { height: 100%; position: relative;}
@@ -84,8 +234,18 @@ header nav .menu li .lnb .lnbmenu li:hover > a {background: #806F4D; border-radi
 
 .section3 {}
 .section3 .container {}
-.section3 .container .content1 {display: flex;}
-.section3 .container .content1 .photo {width: 767px; height: 482px;}
+.section3 .container .content1 {display: flex; border: 1px solid red;}
+.section3 .container .content1 .photo 
+    {width: 100%;       /* 고정 767px를 지우고 100%로 변경 */
+    max-width: 767px;  /* 최대 크기만 제한 */
+    height: auto;      /* 고정 높이 482px를 해제하여 비율 유지 */}
+
+.section3 .container .content1 .photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
 .section3 .container .content1 .textbox {}
 .section3 .container .content1 .textbox ul { display: flex; flex-direction: column; gap: 50px;  padding: 70px 0; padding-left: 30px;}
 .section3 .container .content1 .textbox ul strong {font-size: 32px; color: #806F4D;}
@@ -106,17 +266,258 @@ footer .footertext .top p {}
 footer .footertext .bottom {margin-top: 30px; display: flex; flex-direction: column; gap: 5px;}
 
 
+@media screen and (max-width: 768px) {
+    footer {
+        height: auto; /* 고정 높이 해제 */
+        padding: 40px 0;
+    }
 
-/* sub */
+    footer .container {
+        flex-direction: column; /* 로고와 텍스트를 세로로 */
+        align-items: center;
+        gap: 20px;
+    }
+
+    footer .container h1 {
+        height: auto; /* 기존 415px 해제 */
+    }
+
+    footer .container h1 img {
+        width: 150px; /* 로고 크기 조절 */
+    }
+
+    footer .footertext {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* 상단 메뉴 리스트 조절 */
+    footer .footertext .top {
+        flex-direction: column; /* 메뉴들을 세로로 나열 */
+        gap: 30px;
+        align-items: center;
+    }
+
+    footer .footertext .top li {
+        margin-top: 0;
+        width: 100%;
+    }
+
+    footer .footertext .top strong {
+        font-size: 20px;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    footer .footertext .top p {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    /* 하단 정보 조절 */
+    footer .footertext .bottom {
+        margin-top: 40px;
+        padding: 0 20px;
+        word-break: keep-all; /* 문장이 어색하게 잘리지 않게 함 */
+    }
+
+    footer .footertext .bottom p {
+        font-size: 13px;
+        color: #ccc;
+    }
+}
+
+/* 숙박 시설 sub */
 .section1 {}
-.sub.container { padding: 200px 0;}
+.container {}
+.herowrap {position: relative; border: 1px solid blue; }
+.sub { padding: 200px 0;}
+.herotext_sub {position: absolute; z-index: 15; color: #fff; top: 50%;  font-size: 40px;
+width: 100%; text-align: center; border: 1px solid red; left: 0;}
 .container .content {display: flex; justify-content: center; gap: 150px;}
-.container .textbox {display: flex; flex-direction: column; justify-content: center; gap: 50px;}
+.container .textbox {display: flex; flex-direction: column; justify-content: center;
 .container .textbox p {line-height: 30px;}
 .container .textbox strong {color: #806F4D; font-size: 36px; font-weight: 400;}
 .container figure {width: 881px; height: 509px;  }
-.sub.container .btnmore { display: flex; align-items: center; justify-content: center;}
-.sub.container .btnmore a { width: 194px; height: 60px;font-size: 22px; color: #94855B;
-     display: block;  display: flex; align-items: center; gap: 20px; border: 1px solid #94855B; justify-content: center; margin: 100px 0 170px;}
-.herowrap {border: 1px solid #000;}
-.herotext {border: 1px solid red;}
+.container .content .btnmore a {display: flex;  width: 194px; display: flex; justify-content: center; gap: 30px; 
+padding: 15px 0; }
+}
+
+
+
+
+
+/* 호텔 소개 sub */
+.introduce {margin: 190px 0 250px; }
+.introduce .container {display: flex; flex-wrap: wrap; gap: 80px 20px; border: 1px solid red;}
+.introduce li img {height: 270px; width: 477px; transition: 0.3s;}
+.introduce li img:hover {scale: 1.04;}
+.introduce li .big {font-size: 25px; color: #806F4D;}
+.introduce li .small {font-size: 20px;}
+
+
+@media (max-width:768px)
+{
+    .introduce .container {}
+}
+
+
+
+
+
+
+/* login sub */
+
+.logintext {font-size: 35px; color: #806F4D; text-align: center; padding: 150px 0;}
+
+.login-container {
+    width: 350px;
+    padding: 20px;
+    text-align: center;
+    margin: 0 auto;
+   
+}
+
+/* 입력창 스타일: 하단 테두리만 있는 형태 */
+.input-group input {
+    width: 100%;
+    padding: 15px 5px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    outline: none;
+    font-size: 14px;
+}
+
+/* ID 저장 섹션 */
+.options {
+    text-align: left;
+    margin: 10px 0 30px;
+    font-size: 13px;
+    color: #666;
+}
+
+/* 버튼 공통 스타일 */
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* 로그인 버튼 (검정) */
+.btn-login {
+    background-color: #222;
+    color: white;
+}
+
+/* 카카오 버튼 (노란색) */
+.btn-kakao-login, .btn-kakao-signup {
+    background-color: #FEE500;
+    color: #3C1E1E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-kakao-login img {}
+
+/* 하단 링크 스타일 */
+.footer-links {
+    margin: 20px 0 40px;
+    font-size: 12px;
+    color: #999;
+}
+.footer-links a {
+    color: #999;
+    text-decoration: none;
+}
+
+/* 가장 하단 카카오 회원가입 버튼 */
+.btn-kakao-signup {
+    margin-top: 20px;
+}
+
+.logbanner {padding: 150px 0 180px; position: relative;}
+.logbanner img {width: 100%}
+.logbanner .btn {background: #1D110D; color: #fff;padding: 15px 85px; position: absolute; display: block;
+right: 0; top: 50%; transform: translate(-50%, -50%);}
+
+
+/* 오시는길 sub */
+
+/* 전체 컨테이너 */
+.mapcontainer {
+    width: 1515px;
+    margin: 50px auto;
+    color: #333;
+    font-family: "Noto Sans", sans-serif;
+}
+
+.maptitle {padding-top: 100px;}
+
+h1 {
+    font-size: 31px; /* 기본 28px + 3px */
+    color: #8b7d6b;
+    margin-bottom: 10px;
+    font-weight: normal;
+    
+}
+
+.address {
+    font-size: 21px; /* 기본 18px + 3px */
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* 구글 지도 박스 */
+#google-map {
+    width: 100%;
+    height: 500px;
+    background-color: #f4f4f4;
+    margin-bottom: 40px;
+    border: 1px solid #ddd;
+}
+
+/* 리스트 스타일 */
+.transport-list {
+    list-style: none;
+    padding: 0;
+    border-top: 2px solid #ddd;
+}
+
+.transport-list li {
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.list-title {
+    padding: 23px 10px; /* 기존보다 더 넓게 */
+    font-size: 23px; /* 기존 20px + 3px */
+    color: #444;
+}
+
+.list-title:hover {
+    background-color: #f9f9f9;
+}
+
+/* 클릭 전에는 숨김 처리 */
+.list-content {
+    display: none;
+    padding: 20px 30px;
+    background-color: #fafafa;
+    font-size: 18px; /* 기존 15px + 3px */
+    line-height: 1.8;
+    color: #555;
+}
+
+.list-content strong {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
